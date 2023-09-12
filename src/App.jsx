@@ -24,20 +24,27 @@ function App() {
 
   const handleBookmark = (blog) => {
     console.log(blog);
-    const newBookmarks = [...bookmarks, blog]
-    setBookmarks(newBookmarks)
+    const added = bookmarks.find(item => item.id === blog.id)
+    if (added) {
+      return alert('Already Exist')
+    }
+    else {
+      const newBookmarks = [...bookmarks, blog]
+      setBookmarks(newBookmarks)
+    }
+
     addLS(blog.id)
     console.log(blog.id);
   }
 
-  const handleReadingTime = (readingTime,id) => {
+  const handleReadingTime = (readingTime, id) => {
     const newTotalTime = [...totalTime, readingTime]
     setTotalTime(newTotalTime)
     const reamaining = bookmarks.filter(bookmark => bookmark.id !== id)
     setBookmarks(reamaining)
   }
 
- 
+
   return (
     <div className="max-w-5xl mx-auto my-5">
       <Nav></Nav>
