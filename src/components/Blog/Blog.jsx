@@ -1,6 +1,9 @@
 
-import { FaBookmark } from 'react-icons/fa';
-const Blog = ({ blog, handleBookmark, handleReadingTime }) => {
+import { FaBookmark,FaRegBookmark } from 'react-icons/fa';
+
+
+const Blog = ({ blog, handleBookmark, handleReadingTime,marked}) => {
+    
     const {id, title, cover, author, author_img, posted_date, reading_time, hashtags } = blog
     return (
         <div className='mb-10'>
@@ -17,8 +20,8 @@ const Blog = ({ blog, handleBookmark, handleReadingTime }) => {
                     <div>
                         <p>{reading_time} min read</p>
                     </div>
-                    <div className='ml-2 text-red-500'>
-                        <button onClick={() => handleBookmark(blog)}><FaBookmark /></button>
+                    <div >
+                        <button className={`ml-2 ${marked ? 'text-red-500' : 'text-black'}`} onClick={() => handleBookmark(blog)}>{marked ? <FaBookmark /> : <FaRegBookmark/>}</button>
                     </div>
                 </div>
             </div>

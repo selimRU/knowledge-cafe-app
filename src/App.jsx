@@ -2,28 +2,17 @@ import { useEffect, useState } from "react"
 import Blogs from "./components/Blogs/Blogs"
 import Bookmarks from "./components/Bookmarks/Bookmarks"
 import Nav from "./components/Nav/Nav"
-import { addLS, getMarkedLS } from "./Utilities/Utilities"
+import { addLS } from "./Utilities/Utilities"
 
 
 function App() {
   const [bookmarks, setBookmarks] = useState([])
   const [totalTime, setTotalTime] = useState([])
+  const [marked, setMarked] = useState(false)
 
-  // useEffect(() => {
-  //   if (bookmarks.length) {
-  //     const storedMarked = getMarkedLS()
-  //     const savedMarked = [];
-  //     for (const id of storedMarked) {
-  //       const marked = bookmarks.find(bookmark => bookmark.id === id)
-  //       savedMarked.push(marked)
-  //     }
-  //     setBookmarks(savedMarked)
-  //   }
-
-  // }, [bookmarks])
 
   const handleBookmark = (blog) => {
-    console.log(blog);
+    setMarked(!marked)
     const added = bookmarks.find(item => item.id === blog.id)
     if (added) {
       return alert('Already Exist')
@@ -50,6 +39,9 @@ function App() {
       <Nav></Nav>
       <div className=" md:flex gap-5">
         <Blogs
+          marked={marked}
+         
+          setBookmarks={setBookmarks}
           handleReadingTime={handleReadingTime}
           handleBookmark={handleBookmark}></Blogs>
         <Bookmarks totalTime={totalTime} bookmarks={bookmarks}></Bookmarks>
